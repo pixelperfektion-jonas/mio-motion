@@ -1,46 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Core Plugins & Basics
-  initCacheFix();
-  initGSAP();
-  initLenis();
-  initDynamicCurrentYear();
-  initScrollToTop();
-  initClock();
-  
-  // UI & Globale Layer
-  initCursor();
-  initNavbarAnimation();
-  initPageTransitions();
+  document.fonts.ready.then(function () {
+    // Core Plugins & Basics
+    initCacheFix();
+    initGSAP();
+    initLenis();
+    initDynamicCurrentYear();
+    initScrollToTop();
+    initClock();
+    
+    // UI & Globale Layer
+    initCursor();
+    initNavbarAnimation();
+    initPageTransitions();
 
-  // Content-spezifische Animationen
-  initHeroAnimation();
-  initHeroParallax();
-  initIntroAnimation();
-  initAboutIntroAnimation();
-  initProjectAnimation();
-  initWorkScrollIn();
-  initWorkImageParallax();
-  initWorkItemHover();
-  initWorkTitleList();
-  initStaggerLinks();
-  initContactScroll();
-  initFooterScroll();
-  
-  // Komponenten & Plugins
-  initVJSPlayer();
-  initEllipseCarousel();
-  initImageTrail();
-  initMatterJS();
-  initServiceSwiper();
-  initServiceHome();
-  initAccordion();
-  initGalleryScroll();
-  initNextProjectScroll();
+    // Content-spezifische Animationen
+    initHeroAnimation();
+    initHeroParallax();
+    initIntroAnimation();
+    initAboutIntroAnimation();
+    initProjectAnimation();
+    initWorkScrollIn();
+    initWorkImageParallax();
+    initWorkItemHover();
+    initWorkTitleList();
+    initStaggerLinks();
+    initContactScroll();
+    initFooterScroll();
+    
+    // Komponenten & Plugins
+    initVJSPlayer();
+    initEllipseCarousel();
+    initImageTrail();
+    initMatterJS();
+    initServiceSwiper();
+    initServiceHome();
+    initAccordion();
+    initGalleryScroll();
+    initNextProjectScroll();
 
-  // CMS/Logik
-  initCmsFooter();
-  initCmsMoreProjects();
-  initFilterBasic();
+    // CMS/Logik
+    initCmsFooter();
+    initCmsMoreProjects();
+    initFilterBasic();
+  });
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
