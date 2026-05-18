@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCmsFooter();
   initCmsMoreProjects();
   initFilterBasic();
-}
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GLOBALE VARIABLEN & STATUS
