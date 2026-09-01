@@ -59,6 +59,7 @@ let heightInitialized = false;
 let lastActiveItem = null;
 let isScrolling = false;
 let initialScrollExecuted = false;
+let currentTitleHeight = 0;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CORE SETUP (GSAP, Lenis, Cache)
@@ -726,12 +727,27 @@ function initWorkTitleList() {
   function updateHeight() {
     const element = document.querySelector(".work_title_item_container");
     if (element) {
-      document.documentElement.style.setProperty(
-        "--work-title-height",
-        `${element.offsetHeight}px`
-      );
-      heightInitialized = true;
-      updateActiveItems();
+      const newHeight = element.offsetHeight;
+
+      if (newHeight !== currentTitleHeight && newHeight > 0) {
+        currentTitleHeight = newHeight;
+
+        document.documentElement.style.setProperty(
+          "--work-title-height",
+          `${newHeight}px`
+        );
+        heightInitialized = true;
+        updateActiveItems();
+
+        requestAnimationFrame(() => {
+          if (typeof ScrollTrigger !== "undefined") {
+            ScrollTrigger.refresh();
+          }
+          if (typeof lenis !== "undefined" && typeof lenis.resize === "function") {
+            lenis.resize(); 
+          }
+        });
+      }
     }
   }
 
@@ -785,18 +801,24 @@ function initWorkTitleList() {
     initialScrollExecuted = true;
   }
 
-  // Initial Aufrufe & Event Listener
+  // ResizeObserver für Container-Höhe
+  const containerElement = document.querySelector(".work_title_item_container");
+  if (containerElement) {
+    const resizeObserver = new ResizeObserver(() => {
+      updateHeight();
+    });
+    resizeObserver.observe(containerElement);
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      updateHeight();
+      setTimeout(updateActiveItems, 100);
+    });
+  }
+
   updateHeight();
-  setTimeout(updateHeight, 100);
-  setTimeout(updateActiveItems, 100);
-
-  window.addEventListener("load", () => {
-    requestAnimationFrame(() => requestAnimationFrame(() => updateHeight()));
-    setTimeout(updateActiveItems, 100);
-  });
-
   window.addEventListener("resize", () => {
-    updateHeight();
     setTimeout(updateActiveItems, 50);
   });
 
@@ -811,8 +833,8 @@ function initWorkTitleList() {
     { passive: true }
   );
 
-  window.updateActiveItemsExport = updateActiveItems; // Export for filter function
-}
+  window.updateActiveItemsExport = updateActiveItems;
+  }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CMS & FILTER
