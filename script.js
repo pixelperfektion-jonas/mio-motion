@@ -1252,7 +1252,7 @@ function initEllipseCarousel() {
       transformOrigin: "50% 50%",
       overwrite: true,
     });
-    const duration = pathElement.getTotalLength() / 75;
+    const duration = pathElement.getTotalLength() / 60;
 
     items.forEach((item, index) => {
       animationTweens.push(
